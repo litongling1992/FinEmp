@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<!--一定要对应DAO层下的接口-->
+<mapper namespace="com.baizhi.dao.UserDao">
+
+    <!--Save-->
+    <insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user values (#{id},#{username},#{password},#{roles},#{regsterTime},#{realname})
+    </insert>
+
+    <!--findByUserName-->
+    <select id="findByUserName" parameterType="String" resultType="User">
+          select id,username,password,roles,regsterTime,realname
+          from t_user where username = #{username}
+    </select>
+
+    <select id="findUserById" parameterType="String" resultType="User">
+        select id,username,password,roles,regsterTime,realname
+          from t_user where id = #{id}
+    </select>
+
+    <select id="findAll" resultType="User">
+         select id,username,password,roles,regsterTime,realname
+          from t_user
+    </select>
+
+    <update id="updateOne" parameterType="User">
+         update t_user set username = #{username},password =#{password},roles=#{roles},regsterTime=#{regsterTime},realname=#{realname}
+         where
+         id=#{id}
+    </update>
+
+</mapper>
